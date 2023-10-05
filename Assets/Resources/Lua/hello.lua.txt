@@ -1,0 +1,5 @@
+--将GameManager脚本中的Test方法替换为下列ChangeCode方法
+xlua.hotfix(CS.GameManager,'Test',
+function(self)
+CS.UnityEngine.Debug.Log("Hello Lua!")
+end) 
