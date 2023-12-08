@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Scripts.Items;
-using UnityEngine;
+﻿using Scripts.Items;
 
 public class AttachmentItem : BaseItem
 {

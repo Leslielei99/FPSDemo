@@ -1,16 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 //Idle, Patrol, Chase, React, Attack
 public class IdleState : IState
 {
     private FSM manager;
     private Parameter parameter;
+
     public IdleState(FSM manager)
     {
         this.manager = manager;
         this.parameter = manager.parameter;
     }
+
     public void OnEnter()
     {
         parameter.animator.Play("IdleNormal");
@@ -18,7 +19,6 @@ public class IdleState : IState
 
     public void OnExit()
     {
-
     }
 
     public void OnUpdate()
@@ -33,46 +33,49 @@ public class IdleState : IState
         }
     }
 }
+
 public class PatrolState : IState
 {
     private FSM manager;
     private Parameter parameter;
+
     public PatrolState(FSM manager)
     {
         this.manager = manager;
         this.parameter = manager.parameter;
     }
+
     public void OnEnter()
     {
-
     }
 
     public void OnExit()
     {
-
     }
 
     public void OnUpdate()
     {
-
     }
 }
+
 public class ChaseState : IState
 {
     private FSM manager;
     private Parameter parameter;
+
     public ChaseState(FSM manager)
     {
         this.manager = manager;
         this.parameter = manager.parameter;
     }
+
     public void OnEnter()
     {
         parameter.animator.Play("RunFWD");
     }
+
     public void OnExit()
     {
-
     }
 
     public void OnUpdate()
@@ -83,8 +86,8 @@ public class ChaseState : IState
         }
         manager.FlipTo();
         parameter.agent.SetDestination(parameter.Player.position);
-  //      manager.transform.position = Vector3.MoveTowards(manager.transform.position,
-  //parameter.Player.position, parameter.chaseSpeed * Time.deltaTime);
+        //      manager.transform.position = Vector3.MoveTowards(manager.transform.position,
+        //parameter.Player.position, parameter.chaseSpeed * Time.deltaTime);
         if ((parameter.Player.position - manager.transform.position).magnitude > 10f)
         {
             manager.TransitionState(StateType.Idle);
@@ -94,18 +97,20 @@ public class ChaseState : IState
             manager.TransitionState(StateType.Attack);
         }
     }
-
 }
+
 public class ReactState : IState
 {
     private FSM manager;
     private Parameter parameter;
     private AnimatorStateInfo info;
+
     public ReactState(FSM manager)
     {
         this.manager = manager;
         this.parameter = manager.parameter;
     }
+
     public void OnEnter()
     {
         parameter.animator.Play("SenseSomethingST");
@@ -113,7 +118,6 @@ public class ReactState : IState
 
     public void OnExit()
     {
-
     }
 
     public void OnUpdate()
@@ -126,16 +130,19 @@ public class ReactState : IState
         }
     }
 }
+
 public class AttackState : IState
 {
     private FSM manager;
     private Parameter parameter;
     private AnimatorStateInfo info;
+
     public AttackState(FSM manager)
     {
         this.manager = manager;
         this.parameter = manager.parameter;
     }
+
     public void OnEnter()
     {
         parameter.animator.Play("Attack02");
@@ -143,7 +150,6 @@ public class AttackState : IState
 
     public void OnExit()
     {
-
     }
 
     public void OnUpdate()
@@ -159,6 +165,7 @@ public class AttackState : IState
         }
     }
 }
+
 public class HitState : IState
 {
     private FSM manager;
@@ -166,11 +173,13 @@ public class HitState : IState
 
     private float tmp_time = 0;
     private AnimatorStateInfo info;
+
     public HitState(FSM manager)
     {
         this.manager = manager;
         this.parameter = manager.parameter;
     }
+
     public void OnEnter()
     {
         parameter.animator.Play("GetHit");
@@ -178,7 +187,6 @@ public class HitState : IState
 
     public void OnExit()
     {
-
     }
 
     public void OnUpdate()
@@ -200,25 +208,29 @@ public class HitState : IState
         }
     }
 }
+
 public class DieState : IState
 {
     private FSM manager;
     private Parameter parameter;
     private AnimatorStateInfo info;
+
     public DieState(FSM manager)
     {
         this.manager = manager;
         this.parameter = manager.parameter;
     }
+
     public void OnEnter()
     {
         Controller.Instance().DestoryEnemy();
         parameter.animator.Play("Die");
     }
+
     public void OnExit()
     {
-
     }
+
     public void OnUpdate()
     {
         info = parameter.animator.GetCurrentAnimatorStateInfo(0);
@@ -228,6 +240,7 @@ public class DieState : IState
         }
     }
 }
+
 public class DefendState : IState
 {
     private FSM manager;
@@ -235,20 +248,23 @@ public class DefendState : IState
     private AnimatorStateInfo info;
     private float tmp_ime;
     private float tmp_time2;
+
     public DefendState(FSM manager)
     {
         this.manager = manager;
         this.parameter = manager.parameter;
     }
+
     public void OnEnter()
     {
         parameter.animator.Play("Defend");
         tmp_time2 = tmp_ime;
     }
+
     public void OnExit()
     {
-
     }
+
     public void OnUpdate()
     {
         info = parameter.animator.GetCurrentAnimatorStateInfo(0);
@@ -270,24 +286,28 @@ public class DefendState : IState
         }
     }
 }
+
 public class DefendHitState : IState
 {
     private FSM manager;
     private Parameter parameter;
     private AnimatorStateInfo info;
+
     public DefendHitState(FSM manager)
     {
         this.manager = manager;
         this.parameter = manager.parameter;
     }
+
     public void OnEnter()
     {
         parameter.animator.Play("DefendGetHit");
     }
+
     public void OnExit()
     {
-
     }
+
     public void OnUpdate()
     {
         info = parameter.animator.GetCurrentAnimatorStateInfo(0);

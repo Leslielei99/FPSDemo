@@ -1,11 +1,10 @@
 using System;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 public class AssetsManager : Singlton<AssetsManager>
 {
-
     //私有构造
     private AssetsManager()
     {

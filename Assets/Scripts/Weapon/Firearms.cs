@@ -1,5 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +16,6 @@ namespace Scripts.Weapon
 
         public ParticleSystem MuzzleParticle;
         public ParticleSystem CasingParticle;
-
 
         public AudioSource FirearmsShootingAudioSource;
         public AudioSource FirearmsReloadAudioSource;
@@ -70,24 +67,21 @@ namespace Scripts.Weapon
             rigoutScopeInfo = BaseIronSight;
         }
 
-
         public void DoAttack()
         {
             Shooting();
         }
 
-
         protected abstract void Shooting();
+
         protected abstract void Reload();
 
         //protected abstract void Aim();
-
 
         protected bool IsAllowShooting()
         {
             return Time.time - LastFireTime > 1 / FireRate;
         }
-
 
         protected Vector3 CalculateSpreadOffset()
         {
@@ -97,9 +91,7 @@ namespace Scripts.Weapon
                 return tmp_SpreadPercent * UnityEngine.Random.insideUnitCircle / 3;
             }
             return tmp_SpreadPercent * UnityEngine.Random.insideUnitCircle;
-
         }
-
 
         protected IEnumerator CheckReloadAmmoAnimationEnd()
         {
@@ -129,6 +121,7 @@ namespace Scripts.Weapon
                 }
             }
         }
+
         private void Update()
         {
             if (twoBeijing)
@@ -140,6 +133,7 @@ namespace Scripts.Weapon
                 rigoutScopeInfo.GunFov = 40;
             }
         }
+
         protected IEnumerator DoAim()
         {
             while (true)
@@ -209,7 +203,6 @@ namespace Scripts.Weapon
             Reload();
         }
     }
-
 
     [System.Serializable]
     public class ScopeInfo

@@ -1,19 +1,20 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Events;
+
 public interface IEventIn
 {
-
 }
+
 public class EventIn<T> : IEventIn
 {
     public UnityAction<T> actions;
+
     public EventIn(UnityAction<T> action)
     {
         actions += action;
     }
 }
+
 public class EventIn : IEventIn
 {
     public UnityAction actions;
@@ -23,43 +24,47 @@ public class EventIn : IEventIn
         actions += action;
     }
 }
+
 /// <summary>
-/// ÊÂ¼þÖÐÐÄ µ¥ÀýÄ£Ê½¶ÔÏó
+/// ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½
 /// 1.Dictionary
-/// 2.Î¯ÍÐ
-/// 3.¹Û²ìÕßÉè¼ÆÄ£Ê½
-/// 4.·ºÐÍ
+/// 2.Î¯ï¿½ï¿½
+/// 3.ï¿½Û²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½
+/// 4.ï¿½ï¿½ï¿½ï¿½
 /// </summary>
-public class EventManager 
+public class EventManager
 {
-    //µ¥Àý
+    //ï¿½ï¿½ï¿½ï¿½
     private static EventManager instance;
+
     public static EventManager GetInstance
     {
-        get {
+        get
+        {
             if (instance == null)
                 instance = new EventManager();
             return instance;
         }
     }
-    //key ¡ª¡ª ÊÂ¼þµÄÃû×Ö£¨±ÈÈç£º¹ÖÎïËÀÍö£¬Íæ¼ÒËÀÍö£¬Í¨¹Ø µÈµÈ£©
-    //value ¡ª¡ª ¶ÔÓ¦µÄÊÇ ¼àÌýÕâ¸öÊÂ¼þ ¶ÔÓ¦µÄÎ¯ÍÐº¯ÊýÃÇ
+
+    //key ï¿½ï¿½ï¿½ï¿½ ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½ï¿½ï¿½ï¿½ç£ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ ï¿½ÈµÈ£ï¿½
+    //value ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ ï¿½ï¿½Ó¦ï¿½ï¿½Î¯ï¿½Ðºï¿½ï¿½ï¿½ï¿½ï¿½
     private Dictionary<string, IEventIn> eventDic = new Dictionary<string, IEventIn>();
 
     /// <summary>
-    /// Ìí¼ÓÊÂ¼þ¼àÌý
+    /// ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
-    /// <param name="name">ÊÂ¼þµÄÃû×Ö</param>
-    /// <param name="action">×¼±¸ÓÃÀ´´¦ÀíÊÂ¼þ µÄÎ¯ÍÐº¯Êý</param>
+    /// <param name="name">ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+    /// <param name="action">×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ ï¿½ï¿½Î¯ï¿½Ðºï¿½ï¿½ï¿½</param>
     public void AddEventListener<T>(string name, UnityAction<T> action)
     {
-        //ÓÐÃ»ÓÐ¶ÔÓ¦µÄÊÂ¼þ¼àÌý
-        //ÓÐµÄÇé¿ö
+        //ï¿½ï¿½Ã»ï¿½Ð¶ï¿½Ó¦ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
+        //ï¿½Ðµï¿½ï¿½ï¿½ï¿½
         if (eventDic.ContainsKey(name))
         {
             (eventDic[name] as EventIn<T>).actions += action;
         }
-        //Ã»ÓÐµÄÇé¿ö
+        //Ã»ï¿½Ðµï¿½ï¿½ï¿½ï¿½
         else
         {
             eventDic.Add(name, new EventIn<T>(action));
@@ -67,31 +72,30 @@ public class EventManager
     }
 
     /// <summary>
-    /// ¼àÌý²»ÐèÒª²ÎÊý´«µÝµÄÊÂ¼þ
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½ï¿½Â¼ï¿½
     /// </summary>
     /// <param name="name"></param>
     /// <param name="action"></param>
     public void AddEventListener(string name, UnityAction action)
     {
-        //ÓÐÃ»ÓÐ¶ÔÓ¦µÄÊÂ¼þ¼àÌý
-        //ÓÐµÄÇé¿ö
+        //ï¿½ï¿½Ã»ï¿½Ð¶ï¿½Ó¦ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
+        //ï¿½Ðµï¿½ï¿½ï¿½ï¿½
         if (eventDic.ContainsKey(name))
         {
             (eventDic[name] as EventIn).actions += action;
         }
-        //Ã»ÓÐµÄÇé¿ö
+        //Ã»ï¿½Ðµï¿½ï¿½ï¿½ï¿½
         else
         {
             eventDic.Add(name, new EventIn(action));
         }
     }
 
-
     /// <summary>
-    /// ÒÆ³ý¶ÔÓ¦µÄÊÂ¼þ¼àÌý
+    /// ï¿½Æ³ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
-    /// <param name="name">ÊÂ¼þµÄÃû×Ö</param>
-    /// <param name="action">¶ÔÓ¦Ö®Ç°Ìí¼ÓµÄÎ¯ÍÐº¯Êý</param>
+    /// <param name="name">ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+    /// <param name="action">ï¿½ï¿½Ó¦Ö®Ç°ï¿½ï¿½Óµï¿½Î¯ï¿½Ðºï¿½ï¿½ï¿½</param>
     public void RemoveEventListener<T>(string name, UnityAction<T> action)
     {
         if (eventDic.ContainsKey(name))
@@ -99,7 +103,7 @@ public class EventManager
     }
 
     /// <summary>
-    /// ÒÆ³ý²»ÐèÒª²ÎÊýµÄÊÂ¼þ
+    /// ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
     /// </summary>
     /// <param name="name"></param>
     /// <param name="action"></param>
@@ -110,13 +114,13 @@ public class EventManager
     }
 
     /// <summary>
-    /// ÊÂ¼þ´¥·¢
+    /// ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
-    /// <param name="name">ÄÄÒ»¸öÃû×ÖµÄÊÂ¼þ´¥·¢ÁË</param>
+    /// <param name="name">ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
     public void EventTrigger<T>(string name, T info)
     {
-        //ÓÐÃ»ÓÐ¶ÔÓ¦µÄÊÂ¼þ¼àÌý
-        //ÓÐµÄÇé¿ö
+        //ï¿½ï¿½Ã»ï¿½Ð¶ï¿½Ó¦ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
+        //ï¿½Ðµï¿½ï¿½ï¿½ï¿½
         if (eventDic.ContainsKey(name))
         {
             //eventDic[name]();
@@ -125,14 +129,15 @@ public class EventManager
             //eventDic[name].Invoke(info);
         }
     }
+
     /// <summary>
-    /// ÊÂ¼þ´¥·¢£¨²»ÐèÒª²ÎÊýµÄ£©
+    /// ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½
     /// </summary>
     /// <param name="name"></param>
     public void EventTrigger(string name)
     {
-        //ÓÐÃ»ÓÐ¶ÔÓ¦µÄÊÂ¼þ¼àÌý
-        //ÓÐµÄÇé¿ö
+        //ï¿½ï¿½Ã»ï¿½Ð¶ï¿½Ó¦ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
+        //ï¿½Ðµï¿½ï¿½ï¿½ï¿½
         if (eventDic.ContainsKey(name))
         {
             //eventDic[name]();
@@ -141,9 +146,10 @@ public class EventManager
             //eventDic[name].Invoke(info);
         }
     }
+
     /// <summary>
-    /// Çå¿ÕÊÂ¼þÖÐÐÄ
-    /// Ö÷ÒªÓÃÔÚ ³¡¾°ÇÐ»»Ê±
+    /// ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
+    /// ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½Ê±
     /// </summary>
     public void Clear()
     {

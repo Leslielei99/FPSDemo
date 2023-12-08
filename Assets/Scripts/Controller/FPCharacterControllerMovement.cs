@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Mirror;
+﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class FPCharacterControllerMovement : MonoBehaviour
 {
-
     private CharacterController characterController;
     [SerializeField] private Animator characterAnimator;
     private Vector3 movementDirection;
@@ -16,7 +11,10 @@ public class FPCharacterControllerMovement : MonoBehaviour
     private bool isCrouched;
     private float originHeight;
     public float SprintingSpeed;
+
+    [ContextMenuItem("Add speed", "AddSpeed")]
     public float WalkSpeed;
+
     public float SprintingSpeedWhenCrouched;
     public float WalkSpeedWhenCrouched;
     public float Gravity = 9.8f;
@@ -25,6 +23,12 @@ public class FPCharacterControllerMovement : MonoBehaviour
     public float CurrentSpeed { get; private set; }
 
     private float tmp_time;
+
+    private void AddSpeed()
+    {
+        WalkSpeed += 1;
+    }
+
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -32,7 +36,6 @@ public class FPCharacterControllerMovement : MonoBehaviour
         characterTransform = transform;
         originHeight = characterController.height;
     }
-
 
     private void Update()
     {
@@ -77,7 +80,6 @@ public class FPCharacterControllerMovement : MonoBehaviour
         characterController.Move(tmp_Movement);
     }
 
-
     private IEnumerator DoCrouch(float _target)
     {
         float tmp_CurrentHeight = 0;
@@ -95,6 +97,7 @@ public class FPCharacterControllerMovement : MonoBehaviour
         Debug.Log($"Execute! the animator is empty??? {_animator == null}");
         characterAnimator = _animator;
     }
+
     private void SendPosition()
     {
         // tmp_time += Time.deltaTime;

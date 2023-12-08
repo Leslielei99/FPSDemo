@@ -1,5 +1,6 @@
-using UnityEngine.EventSystems;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 [RequireComponent(typeof(CanvasGroup))]
 public class DragByInterface : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
 {
@@ -8,11 +9,13 @@ public class DragByInterface : MonoBehaviour, IDragHandler, IEndDragHandler, IBe
     private CanvasGroup canvasGroup;
     private Vector3 startPosition;
     public bool isInSlot;
+
     private void Update()
     {
         Slot.isinSlop = isInSlot;
         isInSlot = Slot.isinSlop;
     }
+
     private void Start()
     {
         parentGO = this.transform.parent;
@@ -21,11 +24,13 @@ public class DragByInterface : MonoBehaviour, IDragHandler, IEndDragHandler, IBe
         startPosition = rectTransform.anchoredPosition;
         isInSlot = false;
     }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         canvasGroup.blocksRaycasts = false;
         isInSlot = false;
     }
+
     public void OnDrag(PointerEventData eventData)
     {
         //transform.position = Input.mousePosition;
@@ -41,7 +46,6 @@ public class DragByInterface : MonoBehaviour, IDragHandler, IEndDragHandler, IBe
             this.transform.localPosition = startPosition;
             Debug.Log(this.name + ": wei false");
             Slot.SlotDictionary[this.name].SetActive(false);
-            
         }
     }
 }

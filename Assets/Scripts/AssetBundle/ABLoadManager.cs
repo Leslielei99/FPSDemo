@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ABLoadManager : MonoBehaviour
 {
     private AssetBundle ab;
-    public readonly static ABLoadManager instance = new ABLoadManager();
+    public static readonly ABLoadManager instance = new ABLoadManager();
     // private static ABLoadManager instance;
     // public static ABLoadManager GetInstance()
     // {
@@ -30,7 +27,6 @@ public class ABLoadManager : MonoBehaviour
     /// </summary>
     public void LoadAB(string packageName)
     {
-
         //加载指定AB包
         ab = AssetBundle.LoadFromFile(Application.streamingAssetsPath + "/" + packageName);
         //加载主包

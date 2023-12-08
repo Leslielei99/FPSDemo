@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Scripts.Items;
+using Scripts.Weapon;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Scripts.Items;
-using Scripts.Weapon;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -14,22 +13,15 @@ public class WeaponManager : MonoBehaviour
 
     private Firearms carriedWeapon;
 
-
     [SerializeField] private FPCharacterControllerMovement CharacterControllerMovement;
 
     private AnimatorStateInfo animationStateInfo;
     private IEnumerator waitingForHolsterEndCoroutine;
 
-
     public List<Firearms> Arms = new List<Firearms>();
     public Transform WorldCameraTransform;
     public float RaycastMaxDistance = 2;
     public LayerMask CheckItemLayerMask;
-
-
-
-
-
 
     private void Start()
     {
@@ -62,7 +54,6 @@ public class WeaponManager : MonoBehaviour
             carriedWeapon.ReleaseTrigger();
         }
 
-
         if (Input.GetKeyDown(KeyCode.R))
         {
             //TODO:Reloading the ammo
@@ -80,8 +71,6 @@ public class WeaponManager : MonoBehaviour
             //TODO:退出瞄准
             carriedWeapon.Aiming(false);
         }
-
-
     }
 
     private void CheckItem()
@@ -90,7 +79,6 @@ public class WeaponManager : MonoBehaviour
             WorldCameraTransform.forward,
             out RaycastHit tmp_RaycastHit,
             RaycastMaxDistance, CheckItemLayerMask);
-
 
         if (tmp_IsItem)
         {
@@ -106,7 +94,6 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-
     private void PickupWeapon(BaseItem _baseItem)
     {
         if (!(_baseItem is FirearmsItem tmp_FirearmsItem)) return;
@@ -118,6 +105,7 @@ public class WeaponManager : MonoBehaviour
                 case FirearmsItem.FirearmsType.AssultRefile:
                     MainWeapon = tmp_Arm;
                     break;
+
                 case FirearmsItem.FirearmsType.HandGun:
                     SecondaryWeapon = tmp_Arm;
 
@@ -127,7 +115,6 @@ public class WeaponManager : MonoBehaviour
             SetupCarriedWeapon(tmp_Arm);
         }
     }
-
 
     private void PickupAttachment(BaseItem _baseItem)
     {
@@ -150,13 +137,14 @@ public class WeaponManager : MonoBehaviour
                 }
 
                 break;
+
             case AttachmentItem.AttachmentType.Other:
                 break;
+
             default:
                 throw new ArgumentOutOfRangeException();
         }
     }
-
 
     private void SwapWeapon()
     {
@@ -192,14 +180,12 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-
     private void StartWaitingForHolsterEndCoroutine()
     {
         if (waitingForHolsterEndCoroutine == null)
             waitingForHolsterEndCoroutine = WaitingForHolsterEnd();
         StartCoroutine(waitingForHolsterEndCoroutine);
     }
-
 
     private IEnumerator WaitingForHolsterEnd()
     {
@@ -220,7 +206,6 @@ public class WeaponManager : MonoBehaviour
             yield return null;
         }
     }
-
 
     private void SetupCarriedWeapon(Firearms _targetWeapon)
     {

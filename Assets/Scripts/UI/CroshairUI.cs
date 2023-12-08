@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Scripts.Weapon;
 using UnityEngine;
-using Scripts.Weapon;
+
 public class CroshairUI : MonoBehaviour
 {
     public RectTransform Reticle;
     public CharacterController CharacterController;
-
 
     public float OriginalSize;
     public float TargetSize;

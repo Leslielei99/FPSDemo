@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class View : MonoBehaviour
 {
     private Text _enemyNumText;
@@ -18,11 +17,11 @@ public class View : MonoBehaviour
     {
         Model.Instance.CreatEnemy = () =>
         {
-            _enemyNumText.text = "µÐÈËÊýÁ¿£º " + Model.Instance.EnemyNum.ToString();
+            _enemyNumText.text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ " + Model.Instance.EnemyNum.ToString();
         };
         Model.Instance.DestroyEnemy = () =>
         {
-            _diedEnemyNumText.text = "ÏûÃðÊýÁ¿£º " + Model.Instance.DiedEnemyNum.ToString();
+            _diedEnemyNumText.text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ " + Model.Instance.DiedEnemyNum.ToString();
         };
     }
 }

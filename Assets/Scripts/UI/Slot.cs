@@ -1,7 +1,6 @@
-
-using UnityEngine.EventSystems;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Slot : MonoBehaviour, IDropHandler
 {
@@ -16,6 +15,7 @@ public class Slot : MonoBehaviour, IDropHandler
     private int count, tmp_count;
     public Stack<GameObject> stack;
     public static Dictionary<string, GameObject> SlotDictionary = new Dictionary<string, GameObject>() { };
+
     private void Start()
     {
         SlotDictionary.Add("scope_01", scope_01);
@@ -26,6 +26,7 @@ public class Slot : MonoBehaviour, IDropHandler
         int count = transform.childCount;
         // currentgameobject = GetComponentsInChildren<Transform>();
     }
+
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("Dropppppppp");
@@ -39,12 +40,12 @@ public class Slot : MonoBehaviour, IDropHandler
         Debug.Log(isinSlop);
         //eventData.pointerDrag.GetComponent<RectTransform>().SetParent(this.gameObject.transform);
     }
+
     public void SetGameObjectActive()
     {
-
     }
+
     private void Update()
     {
-
     }
 }

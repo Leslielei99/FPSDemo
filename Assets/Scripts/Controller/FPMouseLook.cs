@@ -1,6 +1,4 @@
-﻿using System;
-using Scripts;
-using Scripts.Weapon;
+﻿using Scripts.Weapon;
 using UnityEngine;
 
 public class FPMouseLook : MonoBehaviour
@@ -12,7 +10,6 @@ public class FPMouseLook : MonoBehaviour
     private Transform cameraTransform;
     private Vector3 cameraRotation;
 
-
     public AnimationCurve RecoilCurve;
     public Vector2 RecoilRange;
 
@@ -23,10 +20,12 @@ public class FPMouseLook : MonoBehaviour
 
     public Firearms AK47;
     public Firearms HandGun;
+
     private void Awake()
     {
         Cursor.visible = false;
     }
+
     private void Start()
     {
         cameraTransform = transform;
@@ -35,7 +34,7 @@ public class FPMouseLook : MonoBehaviour
         // Cursor.lockState;
     }
 
-    void Update()
+    private void Update()
     {
         if (!Cursor.visible)
         {
@@ -59,7 +58,6 @@ public class FPMouseLook : MonoBehaviour
         }
     }
 
-
     private void CalculateRecoilOffset()
     {
         currentRecoilTime += Time.deltaTime;
@@ -67,7 +65,6 @@ public class FPMouseLook : MonoBehaviour
         float tmp_RecoilValue = RecoilCurve.Evaluate(tmp_RecoilFraction);
         currentRecoil = Vector2.Lerp(Vector2.zero, currentRecoil, tmp_RecoilValue);
     }
-
 
     public void FiringForTest()
     {

@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using XLua;
 
 public class LuaTestSC : MonoBehaviour
 {
-    LuaEnv luaEnv = null;
+    private LuaEnv luaEnv = null;
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
     /// any of the Update methods is called the first time.
@@ -20,10 +19,10 @@ public class LuaTestSC : MonoBehaviour
         luaEnv.DoString("print(person.name)");
         luaEnv.Dispose();
     }
-    class Person
+
+    private class Person
     {
         public string name;
         public int age;
     }
-
 }

@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Events;
 
 public class Model
 {
     private static Model instance;
+
     public static Model Instance
     {
         get

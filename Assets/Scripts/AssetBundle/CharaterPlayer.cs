@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharaterPlayer : MonoBehaviour
@@ -7,7 +5,8 @@ public class CharaterPlayer : MonoBehaviour
     public int Health;
     public bool isGetHit = false;
     private float tmp_time;
-    CapsuleCollider capsuleCollider;
+    private CapsuleCollider capsuleCollider;
+
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
@@ -22,6 +21,7 @@ public class CharaterPlayer : MonoBehaviour
             }
         }
     }
+
     private void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();

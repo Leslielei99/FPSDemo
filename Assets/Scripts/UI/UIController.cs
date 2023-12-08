@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 public class UIController : MonoBehaviour
 {
     public GameObject BagPanel;
     private bool isView;
+
     private void Start()
     {
         BagPanel.SetActive(false);
@@ -39,17 +38,18 @@ public class UIController : MonoBehaviour
             }
         }
     }
+
     public void OpenBag()
     {
         BagPanel.SetActive(true);
         Cursor.visible = true;
         isView = true;
     }
+
     public void ColseBag()
     {
         BagPanel.SetActive(false);
         Cursor.visible = false;
         isView = false;
     }
-
 }

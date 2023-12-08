@@ -1,22 +1,21 @@
 using System;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 public class GameObjectPool
 {
-
     #region Singleton
 
     //单例
-    public readonly static GameObjectPool Instance = new GameObjectPool();
+    public static readonly GameObjectPool Instance = new GameObjectPool();
 
     private GameObjectPool()
     {
         pool = new Dictionary<string, List<GameObject>>();
     }
 
-    #endregion
+    #endregion Singleton
 
     #region Object Pool
 
@@ -26,7 +25,7 @@ public class GameObjectPool
     private Dictionary<string, List<GameObject>> pool;
 
     /// <summary>
-    /// 从对象池取对象 
+    /// 从对象池取对象
     /// </summary>
     /// <param name="objName"></param>
     /// <returns></returns>
@@ -100,6 +99,7 @@ public class GameObjectPool
             pool[obj.name].Add(obj);
         }
     }
+
     public void SetGameObject(GameObject obj, Vector3 pos)
     {
         try
@@ -127,5 +127,5 @@ public class GameObjectPool
         }
     }
 
-    #endregion
+    #endregion Object Pool
 }

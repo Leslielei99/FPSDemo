@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using UnityEngine.AI;
 
 public enum StateType
@@ -16,6 +16,7 @@ public enum StateType
     Defend,
     DefendHit
 }
+
 [Serializable]
 public class Parameter
 {
@@ -29,6 +30,7 @@ public class Parameter
     public bool isGetHit;
     public bool isTu;
 }
+
 public class FSM : MonoBehaviour
 {
     public Parameter parameter;
@@ -52,12 +54,13 @@ public class FSM : MonoBehaviour
         TransitionState(StateType.Idle);
         parameter.animator = GetComponent<Animator>();
         parameter.agent = GetComponent<NavMeshAgent>();
-
     }
+
     private void Update()
     {
         currentState.OnUpdate();
     }
+
     public void TransitionState(StateType type)
     {
         if (currentState! != null)
@@ -65,6 +68,7 @@ public class FSM : MonoBehaviour
         currentState = states[type];
         currentState.OnEnter();
     }
+
     public void FlipTo()
     {
         //transform.LookAt(Player);
@@ -72,18 +76,22 @@ public class FSM : MonoBehaviour
         this.transform.rotation = Quaternion.Slerp(this.transform.rotation,
         Quaternion.LookRotation(direction), 0.5f);
     }
+
     public void DestoryGameobject()
     {
         Destroy(this.gameObject, 1);
     }
+
     public void StartWait()
     {
         StartCoroutine(WaitForLook());
     }
-    IEnumerator WaitForLook()
+
+    private IEnumerator WaitForLook()
     {
         yield return new WaitForSeconds(1);
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Bullet"))
@@ -92,6 +100,7 @@ public class FSM : MonoBehaviour
             Debug.Log("受到攻击了");
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Bullet"))

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-//using Unity.Mathematics;
+﻿//using Unity.Mathematics;
 using UnityEngine;
 
 public class CameraSpring : MonoBehaviour
@@ -9,10 +6,8 @@ public class CameraSpring : MonoBehaviour
     public float Frequence = 25;
     public float Damp = 15;
 
-
     public Vector2 MinRecoilRange;
     public Vector2 MaxRecoilRange;
-
 
     private CameraSpringUtility cameraSpringUtility;
     private Transform cameraSpringTransform;
@@ -23,14 +18,12 @@ public class CameraSpring : MonoBehaviour
         cameraSpringTransform = transform;
     }
 
-
     private void Update()
     {
         cameraSpringUtility.UpdateSpring(Time.deltaTime, Vector3.zero);
         cameraSpringTransform.localRotation = Quaternion.Slerp(cameraSpringTransform.localRotation,
             Quaternion.Euler(cameraSpringUtility.Values), Time.deltaTime * 10);
     }
-
 
     public void StartCameraSpring()
     {

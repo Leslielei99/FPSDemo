@@ -1,7 +1,9 @@
 using System;
+
 public class Singlton<T> where T : class//泛型
 {
     private static T _singlton;
+
     public static T Instance
     {
         get

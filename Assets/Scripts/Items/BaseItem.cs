@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Scripts.Items
 {
-    public abstract class BaseItem:MonoBehaviour
+    public abstract class BaseItem : MonoBehaviour
     {
         public enum ItemType
         {

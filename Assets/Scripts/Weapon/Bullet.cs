@@ -1,5 +1,5 @@
-using System;
 using System.Collections;
+
 //using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -16,6 +16,7 @@ namespace Scripts.Weapon
         private Vector3 prevPosition;
         [Header("轨道组件的开始时间")] public float startlifeTime = 0.1f;
         private TrailRenderer trailRenderer;
+
         public override void OnEnable()
         {
             base.OnEnable();
@@ -23,6 +24,7 @@ namespace Scripts.Weapon
             trailRenderer.enabled = false;
             StartCoroutine(DelayEnableComm());
         }
+
         private void Start()
         {
             bulletTransform = transform;
@@ -63,7 +65,6 @@ namespace Scripts.Weapon
             //         tmp_Hit.point,
             //         Quaternion.LookRotation(tmp_Hit.normal, Vector3.up));
 
-
             //StartCoroutine(DelayEnterPool(tmp_BulletEffect));
             //Destroy(tmp_BulletEffect, 3f);
             //For Audio
@@ -74,17 +75,20 @@ namespace Scripts.Weapon
             AudioClip tmp_AudioClip = tmp_TagsWithAudio.ImpactAudioClips[Random.Range(0, tmp_Length)];
             AudioSource.PlayClipAtPoint(tmp_AudioClip, tmp_Hit.point);
         }
+
         private IEnumerator DelayEnterPool(GameObject obj, float time)
         {
             yield return new WaitForSeconds(time);
             //进入对象池
             GameObjectPool.Instance.SetGameObject(obj);
         }
+
         private IEnumerator DelayEnableComm()
         {
             yield return new WaitForSeconds(startlifeTime);
             trailRenderer.enabled = true;
         }
+
         // private void OnTriggerEnter(Collider other)
         // {
         //     if (other.CompareTag("Untagged") || other.CompareTag("Rock") || other.CompareTag("Enemy"))
@@ -92,6 +96,5 @@ namespace Scripts.Weapon
         //         GameObjectPool.Instance.SetGameObject(this.gameObject);
         //     }
         // }
-
     }
 }

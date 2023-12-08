@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,7 +8,6 @@ namespace Scripts.Weapon
         private IEnumerator reloadAmmoCheckerCoroutine;
         private FPMouseLook mouseLook;
 
-
         protected override void Awake()
         {
             base.Awake();
@@ -17,7 +15,6 @@ namespace Scripts.Weapon
 
             mouseLook = FindObjectOfType<FPMouseLook>();
         }
-
 
         protected override void Shooting()
         {
@@ -80,7 +77,6 @@ namespace Scripts.Weapon
         //            }
         //        }
 
-
         //        private void Update()
         //        {
         //            if (Input.GetMouseButton(0))
@@ -115,7 +111,6 @@ namespace Scripts.Weapon
         //            }
         //        }
 
-
         private void CreateBullet()
         {
             //  GameObject tmp_Bullet = Instantiate(BulletPrefab, MuzzlePoint.position, MuzzlePoint.rotation);
@@ -133,6 +128,5 @@ namespace Scripts.Weapon
             //进入对象池
             GameObjectPool.Instance.SetGameObject(obj, MuzzlePoint.position);
         }
-
     }
 }
